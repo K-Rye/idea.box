@@ -17,12 +17,15 @@ function createIdea(e) {
   e.preventDefault();
   var title = titleInput.val();
   var body = bodyInput.val();
-  ideaList.append(`<article class="idea-list">
-        <h3>${title}</h3>
-        <button>&times;</button>
-        <p>${body}</p>
-        <button><</button>
-        <button>></button>
-        <p>Quality: swill</p>
-      </article>`)
+  ideaList.prepend(
+  `<article class="idea-list">
+    <h3>${title}<img class="btn delete-btn" src="delete.svg"></h3>
+    <p class="idea-body-txt">${body}</p>
+    <div class="vote-form">
+      <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: swill</p>
+    </div>
+  </article>`
+  )
+  // titleInput.val('');
+  // bodyInput.val('');
 }
