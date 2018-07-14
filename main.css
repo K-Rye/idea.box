@@ -9,11 +9,11 @@ body {
 
 header {
   background: #E5F3F2;
-  height: 350px;
+  height: 340px;
 }
 
 h1 {
-  padding: 30px 6px 25px;
+  padding: 20px 6px 10px;
   text-align: center;
   font-weight: 700;
   font-size: 3.25em;
@@ -24,15 +24,29 @@ form {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 60%;
+  width: 90%;
 }
 
-.title-input, .body-input {
+.title-input, .body-input, .search-input {
   margin: 10px;
   height: 40px;
   font-size: 2em;
   border: solid #ccd0d1 1.5px;
-  fontcolor: #ccd0d1;
+  font-color: #ccd0d1;
+}
+
+.body-input {
+  height: 85px;
+  padding-bottom: 45px;
+}
+
+.search-parent {
+  width: 90%;
+  margin: auto 5%;
+}
+
+.search-input {
+  width: 97%;
 }
 
 ::placeholder {
@@ -43,8 +57,16 @@ span, h3 {
   font-family: 'Roboto Slab', serif;
 }
 
+.idea-body-txt {
+  color: #A6A7AA;
+}
+
+h3 {
+  color: #78797C;
+}
+
 .idea {
-  color: #00a79d;
+  color: #00A79D;
 
 }
 
@@ -61,10 +83,77 @@ span, h3 {
   font-size: 1.5em;
   margin: 10px auto 15px;
   height: 45px;
+  padding: 0;
 }
 
 .save-btn:hover {
   background-color: #045e55;
 }
 
-/*search button should be fixed*/
+article {
+  width: 90%;
+  margin: auto;
+  font-size: 1.5em;
+  border-bottom: solid #ccd0d1 1.5px;
+  /*border-color: #ccd0d1*/
+}
+
+.vote-form {
+  margin-bottom: 13px;
+}
+
+.quality {
+  display: inline;
+  position: relative;
+  bottom: 10px;
+  left: 20px;
+  color: #97999C;
+}
+
+.btn {
+  width: 1.5em;
+}
+
+.delete-btn {
+  float: right;
+}
+
+.up-btn {
+  margin: 0 10px 0 0;
+}
+
+
+
+
+/*search button should be fixed
+
+Steps: style search bar;
+  
+  bring in svgs
+  size em up
+  size up text in example articles
+  add border
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
