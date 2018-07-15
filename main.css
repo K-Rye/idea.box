@@ -25,6 +25,17 @@ form {
   flex-direction: column;
   margin: auto;
   width: 90%;
+  max-width: 800px;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+}
+
+.ideas-section {
+  max-width: 850px;
+  margin: auto;
 }
 
 .title-input, .body-input, .search-input {
@@ -46,7 +57,7 @@ form {
 }
 
 .search-input {
-  width: 97%;
+  width: 96%;
 }
 
 ::placeholder {
