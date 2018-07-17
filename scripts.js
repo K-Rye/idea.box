@@ -31,8 +31,10 @@ searchInput.on("keyup", searchFunction);
 ideasSection.on("click", ".delete-btn", deleteArticle);
 ideasSection.on("click", ".up-btn", upQuality);
 ideasSection.on("click", ".down-btn", downQuality);
+ideasSection.on("keydown", ".idea-title", enterKeySubmits);
 ideasSection.on("keyup", ".idea-title", editTitleText);
 ideasSection.on("keyup", ".idea-body-txt", editBodyText);
+ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
 
 
 //============================================
@@ -42,9 +44,9 @@ ideasSection.on("keyup", ".idea-body-txt", editBodyText);
 
  function stickySearch() {
     if ($(window).scrollTop() > num) {
-        $('.search-input').addClass('fixed');
+        $('.search-parent').addClass('fixed');
     } else {
-        $('.search-input').removeClass('fixed');
+        $('.search-parent').removeClass('fixed');
     }
 };
 
@@ -61,6 +63,12 @@ function searchFunction() {
   })
 };
 
+function enterKeySubmits(e) {
+  if (e.keyCode == 13 && !e.shiftKey) {
+      e.preventDefault();
+      e.target.blur();
+  }
+}
 
 function editTitleText(e) {
   var thisArticleId = $(event.target).parent().data("unid");
@@ -123,7 +131,7 @@ function displayIdeas() {
     parsedRetrievedIdea.forEach(idea => {
       ideasSection.prepend(
       `<article class="idea-list" data-unid="${idea.uniqueID}">
-        <h3 class="idea-title" contenteditable>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
+        <h3 class="idea-title" contenteditable>${idea.title}</h3><img class="btn delete-btn" src="delete.svg">
         <p class="idea-body-txt" contenteditable>${idea.body}</p>
         <div class="vote-form">
           <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: ${idea.quality}</p>
@@ -138,7 +146,7 @@ function displayIdeas() {
 
 
 function deleteArticle() {
-  var thisArticleId = $(event.target).parent().parent().data("unid")
+  var thisArticleId = $(event.target).parent().data("unid")
   var deleteThisArticle = arrayOfObject.filter(function (anything) {
     return anything.uniqueID !== thisArticleId;
   })
@@ -146,7 +154,7 @@ function deleteArticle() {
   arrayOfObject = deleteThisArticle;
   var stringedIdea = JSON.stringify(arrayOfObject);
   localStorage.setItem('listIdea', stringedIdea);
-  $(event.target).parent().parent().remove()
+  $(event.target).parent().remove()
 };
 
 
@@ -168,7 +176,6 @@ function upQuality() {
 };
 
 function downQuality() {
-
   var thisArticleId = $(event.target).parent().parent().data("unid")
   var downThisArticle = arrayOfObject.filter(function (anything) {
     if (anything.uniqueID == thisArticleId) {
