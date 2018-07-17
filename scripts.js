@@ -10,6 +10,7 @@ var saveBtn = $(".save-btn");
 var searchInput = $(".search-input");
 var ideasSection = $(".ideas-section");
 var ideaList = $(".idea-list");
+var ideaTitle = $(".idea-title")
 var arrayOfObject = getStoredIdeas() || [];
 
 
@@ -27,11 +28,41 @@ saveBtn.on("click", createIdea);
 ideasSection.on("click", ".delete-btn", deleteArticle);
 ideasSection.on("click", ".up-btn", upQuality);
 ideasSection.on("click", ".down-btn", downQuality);
+ideasSection.on("keyup", ".idea-title", editTitleText);
+ideasSection.on("keyup", ".idea-body-txt", editBodyText);
 
 
 //============================================
 // Functions
 //============================================
+
+
+function editTitleText() {
+  var thisArticleId = $(event.target).parent().data("unid");
+  var thisArticleTitleText = $(event.target).text();
+  var changeThisArticle = arrayOfObject.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      anything.title = thisArticleTitleText;
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+}
+
+function editBodyText() {
+  var thisArticleId = $(event.target).parent().data("unid");
+  var thisBodyText = $(event.target).text();
+  var changeThisArticle = arrayOfObject.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      anything.body = thisBodyText;
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+}
+
+
+
 function IdeaObject(title, body) {
   this.title = title;
   this.body = body;
@@ -67,8 +98,8 @@ function displayIdeas() {
     parsedRetrievedIdea.forEach(idea => {
       ideasSection.prepend(
       `<article class="idea-list" data-unid="${idea.uniqueID}">
-        <h3>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
-        <p class="idea-body-txt">${idea.body}</p>
+        <h3 class="idea-title" contenteditable>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
+        <p class="idea-body-txt" contenteditable>${idea.body}</p>
         <div class="vote-form">
           <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: ${idea.quality}</p>
         </div>
@@ -79,6 +110,7 @@ function displayIdeas() {
     // bodyInput.val('');
   }
 };
+
 
 function deleteArticle() {
   var thisArticleId = $(event.target).parent().parent().data("unid")
