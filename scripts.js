@@ -70,7 +70,7 @@ function displayIdeas() {
         <h3>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
         <p class="idea-body-txt">${idea.body}</p>
         <div class="vote-form">
-          <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: swill</p>
+          <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: ${idea.quality}</p>
         </div>
       </article>`
       )
@@ -81,7 +81,6 @@ function displayIdeas() {
 };
 
 function deleteArticle() {
-  var thisArticle = $("article");
   var thisArticleId = $(event.target).parent().parent().data("unid")
   var deleteThisArticle = arrayOfObject.filter(function (anything) {
     return anything.uniqueID !== thisArticleId;
@@ -96,27 +95,36 @@ function deleteArticle() {
 
 
 function upQuality() {
-  var quality = $(".quality");
-  console.log(quality.text());
-  if (quality.text() === 'quality: swill') {
-    quality.text('quality: plausible');
-  } else if (quality.text() === 'quality: plausible') {
-    quality.text('quality: genius');
-  } else {
-    quality.text('quality: genius');
-  }
+  var thisArticleId = $(event.target).parent().parent().data("unid")
+  var upThisArticle = arrayOfObject.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      if (anything.quality == 'swill') {
+        anything.quality = 'plausible';
+      } else if (anything.quality == 'plausible') {
+        anything.quality = 'genius';
+      }
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+  displayIdeas();
 };
 
 function downQuality() {
-  var quality = $(".quality");
-  console.log(quality.text());
-  if (quality.text() === 'quality: swill') {
-    quality.text('quality: swill');
-  } else if (quality.text() === 'quality: plausible') {
-    quality.text('quality: swill');
-  } else {
-    quality.text('quality: plausible');
-  }
+
+  var thisArticleId = $(event.target).parent().parent().data("unid")
+  var downThisArticle = arrayOfObject.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      if (anything.quality == 'genius') {
+        anything.quality = 'plausible';
+      } else if (anything.quality == 'plausible') {
+        anything.quality = 'swill';
+      }
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+  displayIdeas();
 };
 
 
@@ -147,6 +155,10 @@ function downQuality() {
 // The idea should be removed from localStorage. It should not re-appear on next page load.
 // Changing the quality of an idea
 // As we said above, ideas should start out as “swill.” In order to change the recorded quality of an idea, the user will interact with it from the idea list.
+
+
+//=========================
+//ABOVE THIS IS DONE
 
 // Editing an existing idea
 // When a user clicks the title or body of an idea in the list, that text should become an editable text field, pre-populated with the existing idea title or body.
