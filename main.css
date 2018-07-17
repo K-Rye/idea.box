@@ -133,7 +133,13 @@ article {
   margin: 0 10px 0 0;
 }
 
-
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 90%;
+  margin: 5px auto;
+  background: white;
+}
 
 
 /*search button should be fixed
