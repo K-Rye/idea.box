@@ -66,13 +66,12 @@ function displayIdeas() {
     ideasSection.text('')
     parsedRetrievedIdea.forEach(idea => {
       ideasSection.prepend(
-      `<article class="idea-list">
+      `<article class="idea-list" data-unid="${idea.uniqueID}">
         <h3>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
         <p class="idea-body-txt">${idea.body}</p>
         <div class="vote-form">
           <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: swill</p>
         </div>
-        <div class="unique-id" data-unID="${idea.uniqueID}"></div>
       </article>`
       )
     })
@@ -82,11 +81,19 @@ function displayIdeas() {
 };
 
 function deleteArticle() {
-  console.log($(event.target).parent().parent());
-  console.log($(event.target));
   var thisArticle = $("article");
-  // $(this).closest('article').remove();
+  var thisArticleId = $(event.target).parent().parent().data("unid")
+  var deleteThisArticle = arrayOfObject.filter(function (anything) {
+    return anything.uniqueID !== thisArticleId;
+  })
+
+  arrayOfObject = deleteThisArticle;
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+  $(event.target).parent().parent().remove()
 };
+
+
 
 function upQuality() {
   var quality = $(".quality");
