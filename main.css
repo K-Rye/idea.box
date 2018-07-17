@@ -38,6 +38,10 @@ main {
   margin: auto;
 }
 
+.idea-list {
+  margin-top: 15px;
+}
+
 .title-input, .body-input, .search-input {
   margin: 10px;
   height: 40px;
@@ -58,6 +62,7 @@ main {
 
 .search-input {
   width: 96%;
+  z-index: 100;
 }
 
 ::placeholder {
@@ -74,6 +79,7 @@ span, h3 {
 
 h3 {
   color: #78797C;
+  display: inline;
 }
 
 .idea {
@@ -119,6 +125,7 @@ article {
   bottom: 10px;
   left: 20px;
   color: #97999C;
+  z-index: 0;
 }
 
 .btn {
@@ -127,13 +134,21 @@ article {
 
 .delete-btn {
   float: right;
+  display: inline;
 }
 
 .up-btn {
   margin: 0 10px 0 0;
 }
 
-
+.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin: auto;
+  background-color: white;
+  z-index: 100;
+}
 
 
 /*search button should be fixed
