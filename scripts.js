@@ -1,42 +1,91 @@
 //Ideas: keyup event listener for search bar
-// How to change files on hover.
 
 
+//============================================
+// Universal Variables
+//============================================
 var titleInput = $(".title-input");
 var bodyInput = $(".body-input");
 var saveBtn = $(".save-btn");
 var searchInput = $(".search-input");
 var ideasSection = $(".ideas-section");
 var ideaList = $(".idea-list");
+var arrayOfObject = getStoredIdeas() || [];
 
+
+
+//============================================
+// Run on page load
+//============================================
+displayIdeas();
+
+
+//============================================
+// Event Listeners
+//============================================
 saveBtn.on("click", createIdea);
-
 ideasSection.on("click", ".delete-btn", deleteArticle);
 ideasSection.on("click", ".up-btn", upQuality);
 ideasSection.on("click", ".down-btn", downQuality);
 
 
+//============================================
+// Functions
+//============================================
+function IdeaObject(title, body) {
+  this.title = title;
+  this.body = body;
+  this.uniqueID = Date.now(); 
+  this.quality = 'swill';
+}
+
+function getStoredIdeas() {
+  var retrievedIdea = localStorage.getItem('listIdea');
+  var parsedRetrievedIdea = JSON.parse(retrievedIdea);
+  return parsedRetrievedIdea;
+}
 
 function createIdea(e) {
   e.preventDefault();
-  var title = titleInput.val();
-  var body = bodyInput.val();
-  ideasSection.prepend(
-  `<article class="idea-list">
-    <h3>${title}<img class="btn delete-btn" src="delete.svg"></h3>
-    <p class="idea-body-txt">${body}</p>
-    <div class="vote-form">
-      <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: swill</p>
-    </div>
-  </article>`
-  )
-  // titleInput.val('');
-  // bodyInput.val('');
+  var newTitle = titleInput.val();
+  var newBody = bodyInput.val();
+  var newIdea = new IdeaObject(newTitle, newBody)
+  
+
+  arrayOfObject.push(newIdea);
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+  displayIdeas();
+};
+
+function displayIdeas() {
+  var retrievedIdea = localStorage.getItem('listIdea');
+  var parsedRetrievedIdea = JSON.parse(retrievedIdea);
+
+  if (parsedRetrievedIdea !== null) {
+    ideasSection.text('')
+    parsedRetrievedIdea.forEach(idea => {
+      ideasSection.prepend(
+      `<article class="idea-list">
+        <h3>${idea.title}<img class="btn delete-btn" src="delete.svg"></h3>
+        <p class="idea-body-txt">${idea.body}</p>
+        <div class="vote-form">
+          <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: swill</p>
+        </div>
+        <div class="unique-id" data-unID="${idea.uniqueID}"></div>
+      </article>`
+      )
+    })
+    // titleInput.val('');
+    // bodyInput.val('');
+  }
 };
 
 function deleteArticle() {
+  console.log($(event.target).parent().parent());
+  console.log($(event.target));
   var thisArticle = $("article");
-  $(this).closest('article').remove():
+  // $(this).closest('article').remove();
 };
 
 function upQuality() {
