@@ -125,6 +125,18 @@ function displayIdeas() {
   }
 };
 
+function deleteArticle() {
+  var thisArticleId = $(event.target).parent().data("unid")
+  var deleteThisArticle = arraOfIdeas.filter(function (anything) {
+    return anything.uniqueID !== thisArticleID;
+  })
+  arrayOfObject = deleteThisArticle;
+
+  var stringedIdea = JSON.stringify(arrayOfIdeas);
+  localStorage.setItem("listIdea", stringedIdea);
+  $(event.target).parent().remove();
+};
+
 
 
 
