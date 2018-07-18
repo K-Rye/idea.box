@@ -32,8 +32,55 @@ ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
 // Functions
 // =========================
 
-function stick
+function stickySearch() {
+  if ($(window).scrollTop() > num) {
+    $(".search-parent").addClass("fixed");
+  } else {
+    $(".search-parent").removeClass("fixed");
+  }
+};
 
+function searchFunction() {
+  var seachText = $(this).val();
+  $(".ideas-section article").each(function() {
+    if ($(this).text().seach(new RegExp(searchText, "i")) < 0) {
+      $(this).fadeOut();
+    } else {
+      $(this).show();
+    }
+  })
+};
+
+function enterKeySubmits(e) {
+  if (er.keyCode == 13 && !e.shiftKey) {
+    e.preventDefault();
+    e.target.blur();
+  }
+};
+
+function editTitleText(e) {
+  var thisArticleId = $(event.target).parent().data('unid');
+  var thisArticleTitleText = $(event.target).text();
+  var changeThisArticle = arrayOfIdeas.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      anything.title = thisArticleTitleText;
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfIdeas);
+  localStorage.setItem("listIdea", stringedIdea);
+};
+
+function editBodyText() {
+  var thisArticleId = $(event.target).parent.data("unid");
+  var thisBodyText = $(event.target).text();
+  var changeThisArticle = arrayOfIdeas.filter(function (anything) {
+    if (anything.uniqueID == thisArticleId) {
+      anything.body =thisBodyText;
+    }
+  })
+  var stringedIdea = JSON.stringify(arrayOfIdeas);
+  localStorage.setItem("listIdea", stringedIdea);
+}; 
 
 
 
