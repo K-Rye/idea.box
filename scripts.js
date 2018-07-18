@@ -12,7 +12,7 @@ var ideasSection = $(".ideas-section");
 var ideaList = $(".idea-list");
 var ideaTitle = $(".idea-title")
 var arrayOfObject = getStoredIdeas() || [];
-$(window).bind("scroll", stickySearch);
+var wholeWindow = $(window)
 var num = 340; //number of pixels the search bar slides down before becoming fixed.
 
 
@@ -26,6 +26,7 @@ displayIdeas();
 //============================================
 // Event Listeners
 //============================================
+wholeWindow.bind("scroll", stickySearch);
 saveBtn.on("click", createIdea);
 searchInput.on("keyup", searchFunction);
 ideasSection.on("click", ".delete-btn", deleteArticle);
@@ -42,7 +43,7 @@ ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
 //============================================
 
  function stickySearch() {
-    if ($(window).scrollTop() > num) {
+    if (wholeWindow.scrollTop() > num) {
         $('.search-parent').addClass('fixed');
     } else {
         $('.search-parent').removeClass('fixed');
