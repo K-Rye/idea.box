@@ -80,7 +80,20 @@ function editBodyText() {
   })
   var stringedIdea = JSON.stringify(arrayOfIdeas);
   localStorage.setItem("listIdea", stringedIdea);
-}; 
+};
+
+function IdeaObject(title, body) {
+  this.title = title;
+  this.body = body;
+  this.uniqueID = Date.now();
+  this.quality = "swill";
+};
+
+function getStoredIdeas() {
+  var retirevedIdea = localStorage.getItem("listIdea");
+  var parsedRetrievedIdea = JSON.parse(retirevedIdea);
+  return parsedRetrievedIdea;
+};
 
 
 
