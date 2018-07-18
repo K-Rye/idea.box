@@ -56,12 +56,12 @@ main {
 }
 
 .search-parent {
-  width: 90%;
+  width: 87.5%;
   margin: auto 5%;
 }
 
 .search-input {
-  width: 96%;
+  width: 100%;
   z-index: 100;
 }
 
@@ -108,7 +108,8 @@ h3 {
 }
 
 article {
-  width: 90%;
+  min-width: 87.5%;
+  max-width: 92.5%;
   margin: auto;
   font-size: 1.5em;
   border-bottom: solid #ccd0d1 1.5px;
@@ -150,6 +151,18 @@ article {
   z-index: 100;
 }
 
+
+@media (min-width: 550px) {
+  .body-input {
+    height: 40px;
+    padding-bottom: 5px;
+  }
+
+  h1 {
+    padding: 35px 6px 25px;
+    font-size: 4em;
+  }
+}
 
 /*search button should be fixed
 

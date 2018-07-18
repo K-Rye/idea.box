@@ -41,7 +41,6 @@ ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
 // Functions
 //============================================
 
-
  function stickySearch() {
     if ($(window).scrollTop() > num) {
         $('.search-parent').addClass('fixed');
@@ -49,8 +48,6 @@ ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
         $('.search-parent').removeClass('fixed');
     }
 };
-
-
 
 function searchFunction() {
   var searchText = $(this).val();
@@ -94,8 +91,6 @@ function editBodyText() {
   localStorage.setItem('listIdea', stringedIdea);
 }
 
-
-
 function IdeaObject(title, body) {
   this.title = title;
   this.body = body;
@@ -114,8 +109,6 @@ function createIdea(e) {
   var newTitle = titleInput.val();
   var newBody = bodyInput.val();
   var newIdea = new IdeaObject(newTitle, newBody)
-  
-
   arrayOfObject.push(newIdea);
   var stringedIdea = JSON.stringify(arrayOfObject);
   localStorage.setItem('listIdea', stringedIdea);
@@ -125,16 +118,15 @@ function createIdea(e) {
 function displayIdeas() {
   var retrievedIdea = localStorage.getItem('listIdea');
   var parsedRetrievedIdea = JSON.parse(retrievedIdea);
-
   if (parsedRetrievedIdea !== null) {
     ideasSection.text('')
     parsedRetrievedIdea.forEach(idea => {
       ideasSection.prepend(
       `<article class="idea-list" data-unid="${idea.uniqueID}">
-        <h3 class="idea-title" contenteditable>${idea.title}</h3><img class="btn delete-btn" src="delete.svg">
+        <h3 class="idea-title" contenteditable>${idea.title}</h3><img class="btn delete-btn" src="delete.svg" onmouseover="this.src='delete-hover.svg';" onmouseout="this.src='delete.svg';">
         <p class="idea-body-txt" contenteditable>${idea.body}</p>
         <div class="vote-form">
-          <img class="btn up-btn" src="upvote.svg"><img class="btn down-btn" src="downvote.svg"><p class="quality">quality: ${idea.quality}</p>
+          <img class="btn up-btn" src="upvote.svg" onmouseover="this.src='upvote-hover.svg';" onmouseout="this.src='upvote.svg';"><img class="btn down-btn" src="downvote.svg" onmouseover="this.src='downvote-hover.svg';" onmouseout="this.src='downvote.svg';"><p class="quality">quality: ${idea.quality}</p>
         </div>
       </article>`
       )
@@ -150,8 +142,8 @@ function deleteArticle() {
   var deleteThisArticle = arrayOfObject.filter(function (anything) {
     return anything.uniqueID !== thisArticleId;
   })
-
   arrayOfObject = deleteThisArticle;
+  
   var stringedIdea = JSON.stringify(arrayOfObject);
   localStorage.setItem('listIdea', stringedIdea);
   $(event.target).parent().remove()
