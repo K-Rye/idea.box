@@ -132,8 +132,8 @@ function displayIdeas() {
       </article>`
       )
     })
-    // titleInput.val('');
-    // bodyInput.val('');
+    titleInput.val('');
+    bodyInput.val('');
   }
 };
 
