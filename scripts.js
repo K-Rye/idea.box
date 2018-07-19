@@ -53,10 +53,10 @@ function displayIdeas() {
     parsedRetrievedIdea.forEach(idea => {
       ideasSection.prepend
         (`<article class="idea-list" data-unid=${idea.uniqueID}">
-          <h3 class="idea-title" contenteditable>${idea.title}</h3><img class="btn delete-btn" src="delete.svg">
+          <h3 class="idea-title" contenteditable>${idea.title}</h3><img class="btn delete-btn" src="delete.svg" onmouseover="this.src="delete-hover.svg"; "onmouseout="this.src="delete.svg";">
           <p class="idea-body-txt" contenteditable>${idea.body}</p>
           <div class="vote-form">
-            <img class="btn up-btn" src"up-vote.svg" onmouseover="this.src="upvote-hover.svg";"onmouseout="this.src="upvote-svg"
+            <img class="btn up-btn" src"upvote.svg" onmouseover="this.src="upvote-hover.svg";" onmouseout="this.src="upvote.svg";"><img class="btn down-btn" src="downvote.svg" onmouseover="this.src"downvote-hover.svg";" onmouseout="this.src="downvote.svg";"><p class="quality">quality: ${idea.quality}</p>
           </div>
           </article>`)   
     })
@@ -79,9 +79,9 @@ function stickySearch() {
 };
 
 function searchFunction() {
-  var seachText = $(this).val();
+  var searchText = $(this).val();
   $(".ideas-section article").each(function() {
-    if ($(this).text().seach(new RegExp(searchText, "i")) < 0) {
+    if ($(this).text().search(new RegExp(searchText, "i")) < 0) {
       $(this).fadeOut();
     } else {
       $(this).show();
@@ -165,7 +165,7 @@ function downQuality() {
       }
     }
   })
-  var stringedIdea = JSON.stringify(arraOfObject);
+  var stringedIdea = JSON.stringify(arrayOfObject);
   localStorage.setItem("listIdea", stringedIdea);
   displayIdeas();
 };
