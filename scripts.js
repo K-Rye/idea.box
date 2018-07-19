@@ -43,10 +43,14 @@ function createIdea(e) {
   var newBody = bodyInput.val();
   var newIdea = new IdeaObject(newTitle, newBody)
   arrayOfObject.push(newIdea);
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
   displayIdeas();
 };
+
+function stringAndStore() {
+  var stringedIdea = JSON.stringify(arrayOfObject);
+  localStorage.setItem('listIdea', stringedIdea);
+}
 
 function displayIdeas() {
   var retrievedIdea = localStorage.getItem('listIdea');
@@ -103,8 +107,7 @@ function editTitleText(e) {
       anything.title = thisArticleTitleText;
     }
   })
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
 };
 
 function editBodyText() {
@@ -115,8 +118,7 @@ function editBodyText() {
       anything.body = thisBodyText;
     }
   })
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
 };
 
 function enterKeySubmits(e) {
@@ -143,8 +145,7 @@ function upQuality() {
       }
     }
   })
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
   displayIdeas();
 };
 
@@ -159,8 +160,7 @@ function downQuality() {
       }
     }
   })
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
   displayIdeas();
 };
 
@@ -170,8 +170,6 @@ function deleteArticle() {
     return anything.uniqueID !== thisArticleId;
   })
   arrayOfObject = deleteThisArticle;
-  
-  var stringedIdea = JSON.stringify(arrayOfObject);
-  localStorage.setItem('listIdea', stringedIdea);
+  stringAndStore(arrayOfObject);
   $(event.target).parent().remove()
 };
