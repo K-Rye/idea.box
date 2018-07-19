@@ -95,10 +95,10 @@ h3 {
 .save-btn {
   color: #FFFFFF;
   background-color: #00A79D;
-  width: 97%;
+  width: 97.5%;
   border: none;
   font-size: 1.5em;
-  margin: 10px auto 15px;
+  margin: .5em auto .5em;
   height: 45px;
   padding: 0;
 }
@@ -163,36 +163,3 @@ article {
     font-size: 4em;
   }
 }
-
-/*search button should be fixed
-
-Steps: style search bar;
-  
-  bring in svgs
-  size em up
-  size up text in example articles
-  add border
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
