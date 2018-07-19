@@ -22,6 +22,7 @@ displayIdeas();
 // Event Listeners
 //============================================
 
+wholeWindow.bind("scroll", stickySearch);
 saveBtn.on("click", createIdea);
 searchInput.on("keyup", searchFunction);
 wholeWindow.bind("scroll", stickySearch);
@@ -36,6 +37,7 @@ ideasSection.on("keydown", ".idea-body-txt", enterKeySubmits);
 //============================================
 // Functions
 //============================================
+
 
 function createIdea(e) {
   e.preventDefault();
@@ -118,6 +120,7 @@ function editBodyText() {
       anything.body = thisBodyText;
     }
   })
+
   stringAndStore(arrayOfObject);
 };
 
